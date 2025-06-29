@@ -1,9 +1,10 @@
-import React from 'react'
+// import Productdetail from "../Component/Productdetail"
+// const Product = () => {
+//   return (
+//       <div className="mt-16">
+//         <Productdetail />
+//       </div>
+//   )
+// }
 
-const Product = () => {
-  return (
-    <div>Product</div>
-  )
-}
-
-export default Product
+// export default Product
