@@ -17,13 +17,10 @@ const Register = () => {
         alert('provide details');
       }else{
         try {
-          const res = await axios.post('http://localhost:8000/Register',{name, email, password})
-        const receivedData = res.data;
-        
-          console.log(receivedData);
-          navigate('/login')
+          const res = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_ENDPOINT}/Register`,{name, email, password})
+         res.data;
+                  navigate('/login')
         } catch (error) {
-          console.log(error.response.data)
           alert (error.response.data || 'registration failed')
         }
         

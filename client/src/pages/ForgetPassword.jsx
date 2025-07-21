@@ -11,9 +11,8 @@ const ForgetPassword = () => {
     const forgetPassword = async(e) =>{
         e.preventDefault() ;
         try {
-          const res = await axios.post('http://localhost:8000/ForgetPassword', {email : Data.email});
+          const res = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_ENDPOINT}/ForgetPassword`, {email : Data.email});
           alert(res,'successful');
-          console.log(res.data);
           setMessage(res.message);
           navigate('/login')
         } catch (error) {

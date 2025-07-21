@@ -13,10 +13,8 @@ const transporter = nodemailer.createTransport({
         rejectUnauthorized: false, 
     },
 });
-// console.log(process.env.EMAIL_USER, process.env.EMAIL_PASSWORD)
 
 const sendEmail = async(option) =>{
-    console.log(option)
     try {
         if (!option.to || !option.subject || !option.text) {
             throw new Error('Missing required email options');
@@ -32,11 +30,9 @@ const sendEmail = async(option) =>{
             subject : option.subject,
             text : option.text,
         });
-        // console.log('email send successfully');
         
     } catch (error) {
-        console.log("error sending email", error);
-        
+        alert("error sending email", error);
     }
 };
-module.exports = sendEmail
+module.exports = sendEmail;

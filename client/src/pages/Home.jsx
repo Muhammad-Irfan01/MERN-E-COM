@@ -14,8 +14,6 @@ const Home = () => {
   const popularData = data?.filter(item => item.type === 'popular');
   const latestData = data?.filter(item => item.type === 'latest');
   
-  // console.log(latestData)
-
   useEffect(() =>{
     dispatch(getData())
   }, [dispatch]);

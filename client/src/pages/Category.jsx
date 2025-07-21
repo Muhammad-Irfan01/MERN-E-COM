@@ -1,9 +1,6 @@
 import {MdOutlineKeyboardArrowDown} from 'react-icons/md'
-// import all_products from '../assets/all_products'
 import Item from '../Component/Item'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { useEffect } from 'react';
-// import {getData} from '../Redux/action';
+
 
 const Category = ({banner, DATA}) => {
   return (

@@ -13,7 +13,7 @@ const ResetPassword = () => {
     const resetPassword = async(e) =>{
         e.preventDefault();
         try {
-            const res = await axios.post(`http://localhost:8000/ResetPassword/${token}`, {password : Data.password});
+            const res = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_ENDPOINT}/ResetPassword/${token}`, {password : Data.password});
             setMessage(res.data);
             navigate('/login');
         } catch (error) {

@@ -6,10 +6,9 @@ const StoreData = async() =>{
         await Products.deleteMany({});
 
         const store = await Products.insertMany(AllProducts)
-        // console.log(store);
         
     } catch (error) {
-        console.log(error.message + 'Error');
+        alert(error.message + 'Error');
         
     }
 }

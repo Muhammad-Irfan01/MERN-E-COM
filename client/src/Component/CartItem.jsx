@@ -1,30 +1,28 @@
 import axios from 'axios';
-import product_1 from '../assets/product_1.png'
 import { MdDelete } from "react-icons/md";
 import { useState, useEffect } from 'react';
 
 const CartItem = () => {
     const [Data, setData] = useState([]);
     const mergeData = [];
-    console.log(mergeData)
     const cartItem = async() =>{
         const token = localStorage.getItem('accessToken');
         try {
-            const res = await axios.get('http://localhost:8000/Validate', {headers : {Authorization : `Bearer ${token}`}});
+            const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_ENDPOINT}/Validate`, {headers : {Authorization : `Bearer ${token}`}});
             const receivedData = await res.data;
             setData(receivedData.cart)
         } catch (error) {
-            console.log(error.response.data);
+            alert(error.response.data);
         }
     }
 
     const removeItem = async(id) =>{
         const token = localStorage.getItem('accessToken');
         try {
-            await axios.delete(`http://localhost:8000/Remove/${id}`, {headers : {Authorization : `Bearer ${token}`}});
+            await axios.delete(`${import.meta.env.VITE_REACT_APP_BACKEND_ENDPOINT}/${id}`, {headers : {Authorization : `Bearer ${token}`}});
             cartItem();
         } catch (error) {
-            console.log(error.response);
+            alert(error.response);
         }
     }
 

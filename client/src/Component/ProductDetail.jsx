@@ -27,12 +27,12 @@ const Productdetail = () => {
   const getSingleData = async() =>{
     
     try {
-      const res = await axios.get(`http://localhost:8000/getSingleProduct/${id}`);
+      const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_ENDPOINT}/getSingleProduct/${id}`);
       
       const data = res.data;
         setSingData([data])
     } catch (error) {
-      console.log(error.message + 'failed to fetch data');    
+      alert(error.message + 'failed to fetch data');    
     }
   }
   
@@ -42,20 +42,18 @@ const Productdetail = () => {
 
   const CartData = async(id) =>{
     const token = localStorage.getItem('accessToken');
-    console.log(token)
     try {
-        const res = await axios.get(`http://localhost:8000/AddCart/${id}`, {headers : {Authorization : `Bearer ${token}`},})
+        const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_ENDPOINT}/AddCart/${id}`, {headers : {Authorization : `Bearer ${token}`},})
         const receivedData = await res.data;
-        console.log(receivedData);
         setSingData(receivedData);
     } catch (error) {
-        console.log(error.response.data)
+        alert(error.response.data)
     }
 }
 useEffect(() =>{
   const token = localStorage.getItem('accessToken');
   if(!token) {
-    console.log("token not provided")
+    alert("token not provided")
   }
 }, [])
 

@@ -16,14 +16,13 @@ const Login = () => {
       alert('Provide all Fields')
     }else{
       try {
-        const res = await axios.post('http://localhost:8000/Login', {email, password});
+        const res = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_ENDPOINT}/Login`, {email, password});
       const {accessToken, refreshToken} = res.data;
       localStorage.setItem('accessToken', accessToken)
       localStorage.setItem('refreshToken', refreshToken)
         Navigate('/');
         window.location.reload();
       } catch (error) {
-        console.log(error.response.data)
         alert(error.response.data || 'Login failed')
       }
     }

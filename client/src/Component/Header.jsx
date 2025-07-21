@@ -21,12 +21,11 @@ const Header = () => {
 
     const ValidUser = async() =>{
       const token = localStorage.getItem('accessToken');
-      console.log(token)
       if(!token) {
         setIsLoggedIn(false)
       }
       try {
-        const res = await axios.get('http://localhost:8000/Validate', {headers : {Authorization : `Bearer ${token}`}});
+        const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_ENDPOINT}/Validate`, {headers : {Authorization : `Bearer ${token}`}});
             const receivedData = await res.data;
             const Cart = receivedData.cart
             const unique = Cart.filter((item, index, self) => index === self.findIndex(t => t.id === item.id));
@@ -34,7 +33,7 @@ const Header = () => {
             setData([receivedData, uniqueLength]);
             setIsLoggedIn(true)
       } catch (error) {
-        console.log(error.response.data)
+        alert(error.response.data)
         localStorage.removeItem('accessToken');
         navigate('/');
       }
@@ -48,14 +47,14 @@ const Header = () => {
     const LogoutUser = async() =>{
       const token = localStorage.getItem('accessToken')
       try {
-        const res = await axios.post('http://localhost:8000/Logout', {}, {headers : {Authorization : `Bearer ${token}`}})
+         await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_ENDPOINT}/Logout`, {}, {headers : {Authorization : `Bearer ${token}`}})
         alert('logout successful');
         localStorage.removeItem('accessToken');
         setIsLoggedIn(false);
         setData([]);
         navigate('/')
       } catch (error) {
-        console.log(error.response.data)
+        alert(error.response.data)
       }
     }
   return (

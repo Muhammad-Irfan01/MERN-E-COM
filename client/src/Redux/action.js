@@ -6,7 +6,7 @@ import axios from 'axios'
 export const getData = () => async(dispatch) =>{
     dispatch({type : FETCH_DATA_REQUEST});
     try {
-        const res = await axios.get('http://localhost:8000/getProducts');
+        const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_ENDPOINT}/getProducts`);
         dispatch({type : FETCH_DATA_SUCCESS, payload : res.data})
     } catch (error) {
         dispatch({type : FETCH_DATA_FAILURE, payload : error.response?.data?.message})

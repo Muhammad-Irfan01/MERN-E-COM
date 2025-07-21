@@ -1,4 +1,3 @@
-// import { POPULAR } from '../assets/popular'
 import Item from './Item'
 
 const Popular = (popularData) => {  
