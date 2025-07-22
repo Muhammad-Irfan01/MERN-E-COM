@@ -1,7 +1,7 @@
 const express = require("express");
 const Router = new express.Router();
 const Products = require("../Models/ProductSchema");
-const USER = require("../Models/UserSchema");
+const USER = require("../Models/UserSchema.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Access_Token_Key = process.env.Access_Token_Key;
@@ -163,7 +163,7 @@ Router.post("/ForgetPassword", async (req, res) => {
     user.forgetPasswordToken = token;
     user.forgetTokenExpire = expire;
     await user.save();
-    const resetURL = `http://localhost:8000/reset-password/${token}`;
+    const resetURL = `${process.env.FRONTEND_URL || 'http://localhost:5174'}/reset-password/${token}`;
     await sendEmail({
       to: user.email,
       subject: "reset password request",

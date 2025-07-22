@@ -1,7 +1,33 @@
 const mongoose = require("mongoose");
 const Db = process.env.DB;
 
-mongoose
-  .connect(Db, { serverSelectionTimeoutMS: 3000 })
-  .then(() => console.log("DB Connected Successfully"))
-  .catch((error) => console.log("Error Connecting DB" + error.message));
+// Cache the database connection for serverless environments
+let isConnected = false;
+
+const connectDB = async () => {
+  if (isConnected) {
+    return;
+  }
+
+  try {
+    const db = await mongoose.connect(Db, {
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+      bufferCommands: false,
+      bufferMaxEntries: 0,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    
+    isConnected = db.connections[0].readyState === 1;
+    console.log("DB Connected Successfully");
+  } catch (error) {
+    console.error("Error Connecting DB:", error.message);
+    throw error;
+  }
+};
+
+// Initialize connection
+connectDB().catch(console.error);
+
+module.exports = connectDB;
