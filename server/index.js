@@ -11,8 +11,6 @@ app.use('/', Router);
 
 
 
-const port = process.env.PORT
-app.listen (port, () => {
-    console.log(`Server is running on Port ${port}`);
-})
+// Export the app for Vercel serverless deployment
+module.exports = app;
 
