@@ -35,7 +35,7 @@ userSchema.pre('save', async function(next){
         this.password = await bcrypt.hash(this.password, 12);
     }
     next();
-})
+});
 
 userSchema.methods.addCart = async function(product){
     this.cart = await this.cart.concat(product);
